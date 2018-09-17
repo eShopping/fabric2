@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Blanket Cart</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="./assets/images/icons/favicon.png">
+  <style>
+    .splash {
+      position: absolute;
+      z-index: 2000;
+      background: white;
+      color: gray;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0
+    }
+
+    .splash-title {
+      text-align: center;
+      max-width: 500px;
+      margin: 15% auto;
+      padding: 20px
+    }
+
+    .splash-title h1 {
+      font-size: 26px
+    }
+
+    .color-line {
+      border-radius: 4px 4px 0 0
+    }
+  </style>
+
+</head>
+
+<body>
+  <app-root>
+    <!-- Show simple splash screen-->
+    <div class="splash">
+      <div class="color-line"></div>
+      <div class="splash-title">
+        <img src="./assets/img/loader.svg" width="64" height="64" />
+      </div>
+    </div>
+  </app-root>
+
+  <script>
+    window.onbeforeunload = function(e) {
+        let date = Date.now();
+        localStorage.setItem("lastactivity", date);
+    };
+    window.onload = function() {
+        let date1 = localStorage.getItem('lastactivity');
+        let date2 = Date.now();
+        if (date1 !== undefined) {
+         let difference = date2 - date1;
+         let diff = ((difference) / 1000).toFixed(0);
+         if (diff > 10) {
+            localStorage.clear();
+            //localStorage.removeItem(key);  for removing a single item
+            location.reload();
+         }
+        }
+    };
+</script>
+</body>
+
+</html>
